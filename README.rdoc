@@ -1,0 +1,11 @@
+= Rzd
+
+Rzd is a gem automating checking ticket information for russian railway service rzd.ru.
+
+== Contributors
+
+* Alexey Noskov (http://github.com/alno)
+
+Feel free to request pull of new providers.
+
+Copyright (c) 2011 Alexey Noskov, released under the MIT license
