@@ -1,19 +1,31 @@
 #!/usr/bin/env ruby
 
 unless ARGV[0] && ARGV[1] && ARGV[2]
-  puts 'Usage: rzd [FROM] [TO] [DAY.MONTH]'
+  puts 'Usage: rzd [FROM] [TO] [DAY.MONTH] [TRAIN]'
   exit
 end
 
 require 'rubygems'
 require 'rzd'
 
-trains = Rzd.get_trains( ARGV[0], ARGV[1], ARGV[2] )
+if ARGV[3]
+  coaches = Rzd.get_coaches( ARGV[0], ARGV[1], ARGV[2], ARGV[3] )
 
-if trains.empty?
-  puts " -- "
+  if coaches.empty?
+    puts " -- "
+  else
+    coaches.each do |coach|
+      puts "#{coach.num} \t#{coach.type} \t#{coach.cost} \t#{coach.seats[:all]}"
+    end
+  end
 else
-  trains.each do |train|
-    puts "#{train.num} \t#{train.name}   \t#{train.seat_table}"
+  trains = Rzd.get_trains( ARGV[0], ARGV[1], ARGV[2] )
+
+  if trains.empty?
+    puts " -- "
+  else
+    trains.each do |train|
+      puts "#{train.num} \t#{train.name}   \t#{train.seat_table}"
+    end
   end
 end
